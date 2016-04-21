@@ -34,5 +34,19 @@ public class Review {
     public String getHelpfulness(){
         return helpfulness;
     }
+    
+    public boolean equals(Review rev1){
+        if(!rev1.getUserID().equals(userID))
+            return false;
+        if(!rev1.getMovieID().equals(movieID))
+            return false;
+        if(!rev1.getText().equals(text))
+            return false;
+        if(!rev1.getRating().equals(rating))
+            return false;
+        if(!rev1.getHelpfulness().equals(helpfulness))
+            return false;
+        return true;
+    }
 
 }
