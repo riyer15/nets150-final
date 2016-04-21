@@ -18,20 +18,24 @@ public class MovieReader {
         Reader r = new FileReader("movies.txt");
         BufferedReader br1 = new BufferedReader(r);
         String x = br1.readLine();
-        String userID;
-        String productID;
-        String profileName;
-        String helpfulness;
+        String userID = "";
+        String productID = "";
+        String profileName = "";
+        String helpfulness = "";
         String score  = "";
-        String time;
+        String time = "";
         String summary = "";
-        String text;
+        String text = "";
+        Set<Review> rev = new HashSet<Review>();
+        Set<User> user = new HashSet<User>();
+        Set<Movie> mov = new HashSet<Movie>();
+
+
         while(x != null){
             System.out.println(x);
-            //if(x.contains("product/productId:")){
-                System.out.println(x);
-                //int i = 0;
-                //while(i < 8){
+            //if(x.equals("")){
+                for(int i = 0; i < 8; i++){
+                    System.out.println(x);
                     if(x.contains("productId")){
                         productID = x.substring(x.indexOf(" ") + 1);
                     }
@@ -56,10 +60,24 @@ public class MovieReader {
                     else if(x.contains("review/text:")){
                         text = x.substring(x.indexOf(" ") + 1);
                     }
-          
-                    //Movie mov = new Movie(productID, new HashSet<Review>(), new HashSet<User>());
-                    
-             
+                    x = br1.readLine();
+                }
+            Review re = new Review(userID, productID, text, score, helpfulness);
+            User u = new User(userID, mov, rev, profileName);
+            Movie m = new Movie(productID, rev, user);
+            if(movieSet.contains(m)){
+                if(userSet.contains(u)){
+                    m.addReview(re, u);
+                }
+                else{
+                    userSet.add(u);
+                    //u.add
+                }
+                
+            }
+            else{
+                movieSet.add(m);
+            }
                // }
            // }
             x = br1.readLine();

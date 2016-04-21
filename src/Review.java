@@ -1,5 +1,7 @@
 
 public class Review {
+    User user;
+    Movie movie;
     String userID;
     String movieID;
     String text;
@@ -16,11 +18,19 @@ public class Review {
     }
     
     public String getUserID(){
-        return userID;
+        return user.getID();
+    }
+    
+    public User getUser(){
+        return user;
     }
     
     public String getMovieID(){
-        return movieID;
+        return movie.getId();
+    }
+    
+    public Movie getMovie(){
+        return movie;
     }
     
     public String getText(){
@@ -36,9 +46,9 @@ public class Review {
     }
     
     public boolean equals(Review rev1){
-        if(!rev1.getUserID().equals(userID))
+        if(!rev1.getUser().equals(user))
             return false;
-        if(!rev1.getMovieID().equals(movieID))
+        if(!rev1.getMovie().equals(movie))
             return false;
         if(!rev1.getText().equals(text))
             return false;
