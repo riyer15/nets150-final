@@ -12,10 +12,9 @@ public class MovieReader {
 	 *  Sets don't allow you to find a specific object without using an iterator, (look it up)
 	 * so I changed their representation to Lists. Though the List doesn't guarantee 
 	 * uniqueness, we check for pre-existence in our code when we 
-	 * create our objects, so the list implementation is basically unique anyway. 
-	 * - Rani 
+	 * create our objects, so the list implementation is basically unique anyway.
 	 */
-    List<Movie> movieSet; 
+    static List<Movie> movieSet; 
    
     List<User> userSet;
     List<Review> reviewSet;
@@ -42,10 +41,10 @@ public class MovieReader {
 
 
         while(x != null){
-            System.out.println(x);
+            //System.out.println(x);
             //if(x.equals("")){
                 for(int i = 0; i < 8; i++){
-                    System.out.println(x);
+                    //System.out.println(x);
                     if(x.contains("productId")){
                         productID = x.substring(x.indexOf(" ") + 1);
                     }
@@ -84,8 +83,7 @@ public class MovieReader {
              * Review C to Movie A, Movie A in User B's list will have has Review C. 
              * That's why fact that some of the objects are incomplete when we add them
              * to the list isn't that big of a deal -- updates to one object are reflected
-             * in all their associated objects. Text me if you're still confused (or maybe
-             * look up the 120 Notes?) - Rani 
+             * in all their associated objects. 
              */
             if(movieSet.contains(m)){
             	m = movieSet.get(movieSet.indexOf(m));
@@ -125,5 +123,6 @@ public class MovieReader {
     
     public static void main(String[]args) throws IOException{
         MovieReader mr = new MovieReader();
+        System.out.println(movieSet.get(3));
     }
 }
