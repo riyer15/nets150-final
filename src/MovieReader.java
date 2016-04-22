@@ -39,8 +39,8 @@ public class MovieReader {
         Set<User> user = new HashSet<User>();
         Set<Movie> mov = new HashSet<Movie>();
 
-
-        while(x != null){
+        int z = 0;
+        while(x != null && z < 2000){
             //System.out.println(x);
             //if(x.equals("")){
                 for(int i = 0; i < 8; i++){
@@ -86,7 +86,8 @@ public class MovieReader {
              * in all their associated objects. 
              */
             if(movieSet.contains(m)){
-            	m = movieSet.get(movieSet.indexOf(m));
+            	System.out.println(m);
+                m = movieSet.get(movieSet.indexOf(m));
             	if(userSet.contains(u)){
             		u = userSet.get(userSet.indexOf(u));
             		m.addReview(re, u);
@@ -115,6 +116,7 @@ public class MovieReader {
             
                // }
            // }
+            z++;
             x = br1.readLine();
 
            // System.out.println(score);
@@ -122,7 +124,16 @@ public class MovieReader {
     }
     
     public static void main(String[]args) throws IOException{
-        MovieReader mr = new MovieReader();
-        System.out.println(movieSet.get(3));
+        System.out.println("here");
+        //MovieReader mr = new MovieReader();
+        MovieReader x = new MovieReader();
+        System.out.println(movieSet.get(7).getId());
+        System.out.println(movieSet.get(1000).getReviewers().size());
+        System.out.println(movieSet.get(1998).getReviewers().size());
+
+        System.out.println(movieSet.get(700).getId());
+        System.out.println(movieSet.get(500).getId());
+        System.out.println(movieSet.get(501).getId());
+        System.out.println(movieSet.get(502).getId());
     }
 }
