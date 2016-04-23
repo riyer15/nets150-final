@@ -3,6 +3,7 @@ public class Questions {
 	
 	//Question 1: Sam : If user A and user B both review Movie C, does this 
 	//mean they will both review Movie D?
+	//
 	public void question1() {
 		
 	}
