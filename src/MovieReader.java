@@ -43,6 +43,9 @@ public class MovieReader {
 
         while(x != null){
             System.out.println(x);
+        int z = 0;
+        while(x != null && z < 2000){
+            //System.out.println(x);
             //if(x.equals("")){
                 for(int i = 0; i < 8; i++){
                     System.out.println(x);
@@ -88,7 +91,8 @@ public class MovieReader {
              * look up the 120 Notes?) - Rani 
              */
             if(movieSet.contains(m)){
-            	m = movieSet.get(movieSet.indexOf(m));
+            	System.out.println(m);
+                m = movieSet.get(movieSet.indexOf(m));
             	if(userSet.contains(u)){
             		u = userSet.get(userSet.indexOf(u));
             		m.addReview(re, u);
@@ -117,13 +121,17 @@ public class MovieReader {
             
                // }
            // }
+            z++;
             x = br1.readLine();
 
            // System.out.println(score);
-        }
+        }}
     }
     
     public static void main(String[]args) throws IOException{
         MovieReader mr = new MovieReader();
+        System.out.println("here");
+        //MovieReader mr = new MovieReader();
+        MovieReader x = new MovieReader();
     }
 }
