@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Questions {
 	
@@ -34,6 +35,11 @@ public class Questions {
 	//reviews of the same movie, or from all the movie reviews in general?
 	public void quesion6() {
 		
+	}
+	
+	public static void main(String[]args) throws IOException{
+	    MovieReader m = new MovieReader();
+	    System.out.println(m.getMovies().size());
 	}
 
 }

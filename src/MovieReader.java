@@ -103,7 +103,9 @@ public class MovieReader {
             else{
                 movieSet.add(m);
                 if(userSet.contains(u)){
-                	u = userSet.get(userSet.indexOf(u));
+                    System.out.println("Now");
+
+                    u = userSet.get(userSet.indexOf(u));
                 	u.addReview(re);
                 	m.addReview(re, u);
                 }
@@ -121,6 +123,10 @@ public class MovieReader {
 
            // System.out.println(score);
         }
+    }
+    
+    public List<Movie> getMovies(){
+        return movieSet;
     }
     
     public static void main(String[]args) throws IOException{
