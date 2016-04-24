@@ -14,10 +14,9 @@ public class MovieReader {
 	 * uniqueness, we check for pre-existence in our code when we 
 	 * create our objects, so the list implementation is basically unique anyway.
 	 */
-    static List<Movie> movieSet; 
-   
-    List<User> userSet;
-    List<Review> reviewSet;
+    private List<Movie> movieSet; 
+    private List<User> userSet;
+    private List<Review> reviewSet;
     
     public MovieReader() throws IOException{
         movieSet = new ArrayList<Movie>(); 
@@ -121,19 +120,32 @@ public class MovieReader {
 
            // System.out.println(score);
         }
+        
+    }
+    
+    public List<Movie> getMovies() {
+    	return movieSet;
+    }
+    
+    public List<User> getUsers() {
+    	return userSet;
+    }
+    
+    public List<Review> getReviews() {
+    	return reviewSet;
     }
     
     public static void main(String[]args) throws IOException{
         System.out.println("here");
         //MovieReader mr = new MovieReader();
         MovieReader x = new MovieReader();
-        System.out.println(movieSet.get(7).getId());
-        System.out.println(movieSet.get(1000).getReviewers().size());
-        System.out.println(movieSet.get(1998).getReviewers().size());
+        System.out.println(x.getMovies().get(7).getId());
+        //System.out.println(movieSet.get(1000).getReviewers().size());
+        //System.out.println(movieSet.get(1998).getReviewers().size());
 
-        System.out.println(movieSet.get(700).getId());
-        System.out.println(movieSet.get(500).getId());
-        System.out.println(movieSet.get(501).getId());
-        System.out.println(movieSet.get(502).getId());
+        //System.out.println(movieSet.get(700).getId());
+        System.out.println(x.getMovies().get(500).getId());
+        System.out.println(x.getMovies().get(501).getId());
+        System.out.println(x.getMovies().get(502).getId());
     }
 }

@@ -1,5 +1,18 @@
+import java.io.IOException;
+import java.util.List;
 
 public class Questions {
+	
+	private List<User> users;
+	private List<Review> reviews;
+	private List<Movie> movies;
+	
+	public Questions() throws IOException {
+		MovieReader mr = new MovieReader();
+		this.users = mr.getUsers();
+		this.reviews = mr.getReviews();
+		this.movies = mr.getMovies();
+	}
 	
 	//Question 1: Sam : If user A and user B both review Movie C, does this 
 	//mean they will both review Movie D?
