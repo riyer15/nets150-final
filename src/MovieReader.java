@@ -128,10 +128,12 @@ public class MovieReader {
 
            // System.out.println(score);
         }}
+
     }
     
     public List<Movie> getMovies(){
         return movieSet;
+
     }
     
     public static void main(String[]args) throws IOException{
