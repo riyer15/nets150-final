@@ -29,8 +29,9 @@ public class Movie {
 		reviewers.add(u);
 	}
 	
-	public boolean equals(Movie m) {
-		return this.id.equals(m.getId());
+	@Override
+	public boolean equals(Object m) {
+		return this.id.equals(((Movie)m).getId());
 	}
 	
 	
