@@ -41,8 +41,8 @@ public class MovieReader {
         Set<Movie> mov = new HashSet<Movie>();
 
 
-        while(x != null){
-            System.out.println(x);
+        //while(x != null){
+          //  System.out.println(x);
         int z = 0;
         while(x != null && z < 2000){
             //System.out.println(x);
@@ -108,9 +108,7 @@ public class MovieReader {
             else{
                 movieSet.add(m);
                 if(userSet.contains(u)){
-                    System.out.println("Now");
-
-                    u = userSet.get(userSet.indexOf(u));
+                	u = userSet.get(userSet.indexOf(u));
                 	u.addReview(re);
                 	m.addReview(re, u);
                 }
@@ -128,18 +126,18 @@ public class MovieReader {
 
            // System.out.println(score);
         }}
-
-    }
+    //}
     
-    public List<Movie> getMovies(){
+    public List<Movie> getMovieSet(){
         return movieSet;
-
+    }
+    public List<User> getUserSet(){
+        return userSet;
     }
     
     public static void main(String[]args) throws IOException{
         MovieReader mr = new MovieReader();
-        System.out.println("here");
         //MovieReader mr = new MovieReader();
-        MovieReader x = new MovieReader();
+        //MovieReader x = new MovieReader();
     }
 }

@@ -40,7 +40,7 @@ public class Questions {
 	
 	public static void main(String[]args) throws IOException{
 	    MovieReader m = new MovieReader();
-	    System.out.println(m.getMovies().size());
+	    //System.out.println(m.getMovies().size());
 	}
 
 }

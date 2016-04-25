@@ -16,22 +16,22 @@ public class Corpus {
     /**
      * An arraylist of all documents in the corpus.
      */
-    private ArrayList<Document> documents;
+    private ArrayList<ReviewDoc> reviews;
     
     /**
      * The inverted index. 
      * It will map a term to a set of documents that contain that term.
      */
-    private HashMap<String, Set<Document>> invertedIndex;
+    private HashMap<String, Set<ReviewDoc>> invertedIndex;
     
     /**
      * The constructor - it takes in an arraylist of documents.
      * It will generate the inverted index based on the documents.
      * @param documents the list of documents
      */
-    public Corpus(ArrayList<Document> documents) {
-        this.documents = documents;
-        invertedIndex = new HashMap<String, Set<Document>>();
+    public Corpus(ArrayList<ReviewDoc> reviews) {
+        this.reviews = reviews;
+        invertedIndex = new HashMap<String, Set<ReviewDoc>>();
         
         createInvertedIndex();
     }
@@ -42,16 +42,16 @@ public class Corpus {
     private void createInvertedIndex() {
         System.out.println("Creating the inverted index");
         
-        for (Document document : documents) {
-            Set<String> terms = document.getTermList();
+        for (ReviewDoc rev : reviews) {
+            Set<String> terms = rev.getTermList();
             
             for (String term : terms) {
                 if (invertedIndex.containsKey(term)) {
-                    Set<Document> list = invertedIndex.get(term);
-                    list.add(document);
+                    Set<ReviewDoc> list = invertedIndex.get(term);
+                    list.add(rev);
                 } else {
-                    Set<Document> list = new TreeSet<Document>();
-                    list.add(document);
+                    Set<ReviewDoc> list = new TreeSet<ReviewDoc>();
+                    list.add(rev);
                     invertedIndex.put(term, list);
                 }
             }
@@ -65,8 +65,8 @@ public class Corpus {
      */
     public double getInverseDocumentFrequency(String term) {
         if (invertedIndex.containsKey(term)) {
-            double size = documents.size();
-            Set<Document> list = invertedIndex.get(term);
+            double size = reviews.size();
+            Set<ReviewDoc> list = invertedIndex.get(term);
             double documentFrequency = list.size();
             
             return Math.log10(size / documentFrequency);
@@ -78,14 +78,14 @@ public class Corpus {
     /**
      * @return the documents
      */
-    public ArrayList<Document> getDocuments() {
-        return documents;
+    public ArrayList<ReviewDoc> getReviews() {
+        return reviews;
     }
 
     /**
      * @return the invertedIndex
      */
-    public HashMap<String, Set<Document>> getInvertedIndex() {
+    public HashMap<String, Set<ReviewDoc>> getInvertedIndex() {
         return invertedIndex;
     }
 }

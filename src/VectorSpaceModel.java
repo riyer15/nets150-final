@@ -20,7 +20,7 @@ public class VectorSpaceModel {
      * The hashmap maps a document to another hashmap.
      * The second hashmap maps a term to its tf-idf weight for this document.
      */
-    private HashMap<Document, HashMap<String, Double>> tfIdfWeights;
+    private HashMap<ReviewDoc, HashMap<String, Double>> tfIdfWeights;
     
     /**
      * The constructor.
@@ -30,7 +30,7 @@ public class VectorSpaceModel {
      */
     public VectorSpaceModel(Corpus corpus) {
         this.corpus = corpus;
-        tfIdfWeights = new HashMap<Document, HashMap<String, Double>>();
+        tfIdfWeights = new HashMap<ReviewDoc, HashMap<String, Double>>();
         
         createTfIdfWeights();
     }
@@ -42,7 +42,7 @@ public class VectorSpaceModel {
         System.out.println("Creating the tf-idf weight vectors");
         Set<String> terms = corpus.getInvertedIndex().keySet();
         
-        for (Document document : corpus.getDocuments()) {
+        for (ReviewDoc document : corpus.getReviews()) {
             HashMap<String, Double> weights = new HashMap<String, Double>();
             
             for (String term : terms) {
@@ -62,7 +62,7 @@ public class VectorSpaceModel {
      * @param document the document whose magnitude is calculated.
      * @return the magnitude
      */
-    private double getMagnitude(Document document) {
+    private double getMagnitude(ReviewDoc document) {
         double magnitude = 0;
         HashMap<String, Double> weights = tfIdfWeights.get(document);
         
@@ -79,7 +79,7 @@ public class VectorSpaceModel {
      * @param d2 Document 2
      * @return the dot product of the documents
      */
-    private double getDotProduct(Document d1, Document d2) {
+    private double getDotProduct(ReviewDoc d1, ReviewDoc d2) {
         double product = 0;
         HashMap<String, Double> weights1 = tfIdfWeights.get(d1);
         HashMap<String, Double> weights2 = tfIdfWeights.get(d2);
@@ -98,7 +98,7 @@ public class VectorSpaceModel {
      * @param d2 Document 2
      * @return the cosine similarity
      */
-    public double cosineSimilarity(Document d1, Document d2) {
+    public double cosineSimilarity(ReviewDoc d1, ReviewDoc d2) {
         return getDotProduct(d1, d2) / (getMagnitude(d1) * getMagnitude(d2));
     }
 }
