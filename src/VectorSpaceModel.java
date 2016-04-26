@@ -41,14 +41,14 @@ public class VectorSpaceModel {
     private void createTfIdfWeights() {
         System.out.println("Creating the tf-idf weight vectors");
         Set<String> terms = corpus.getInvertedIndex().keySet();
-        
+        System.out.println("Here");
         for (ReviewDoc document : corpus.getReviews()) {
             HashMap<String, Double> weights = new HashMap<String, Double>();
-            
+            System.out.println("Stuck yet");
             for (String term : terms) {
                 double tf = document.getTermFrequency(term);
                 double idf = corpus.getInverseDocumentFrequency(term);
-                
+                //System.out.println("how bout now");
                 double weight = tf * idf;
                 
                 weights.put(term, weight);

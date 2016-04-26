@@ -137,6 +137,7 @@ public class MovieReader {
     
     public static void main(String[]args) throws IOException{
         MovieReader mr = new MovieReader();
+        System.out.println("done");
         //MovieReader mr = new MovieReader();
         //MovieReader x = new MovieReader();
     }

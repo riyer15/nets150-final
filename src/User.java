@@ -38,11 +38,8 @@ public class User {
     public Set<Review> getReviews(){
         return reviews;
     }
-    
-    public boolean equals(User u){
-        if(!u.getID().equals(userID)){
-            return false;
-        }
-        return true;
+    @Override
+    public boolean equals(Object u){
+        return this.userID.equals(((User)u).getID());
     }
 }

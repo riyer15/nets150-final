@@ -11,7 +11,7 @@ import java.util.Set;
  * It will keep track of the term frequencies.
  *
  */
-public class ReviewDoc {
+public class ReviewDoc implements Comparable<ReviewDoc>{
     
     /**
      * A hashmap for term frequencies.
@@ -88,20 +88,20 @@ public class ReviewDoc {
         return termFrequency.keySet();
     }
 
-    @Override
+    
     /**
      * The overriden method from the Comparable interface.
      */
-   /* public int compareTo(Review other) {
-        return reviewname.compareTo(other.getFileName());
+    public int compareTo(ReviewDoc other) {
+        return reviewname.compareTo(other.getReviewName());
     }
 
     /**
      * @return the filename
      */
-    /*private String getFileName() {
+    private String getReviewName() {
         return reviewname;
-    }*/
+    }
     
     /**
      * This method is used for pretty-printing a Document object.
