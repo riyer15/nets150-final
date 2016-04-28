@@ -15,11 +15,10 @@ public class MovieReader {
 	 * create our objects, so the list implementation is basically unique anyway. 
 	 * - Rani 
 	 */
-    List<Movie> movieSet; 
-   
-    List<User> userSet;
-    List<Review> reviewSet;
-    
+    private List<Movie> movieSet; 
+    private List<User> userSet;
+    private List<Review> reviewSet;
+
     public MovieReader() throws IOException{
         movieSet = new ArrayList<Movie>(); 
         userSet = new ArrayList<User>();
@@ -142,7 +141,22 @@ public class MovieReader {
             x = br1.readLine();
 
            // System.out.println(score);
-        }}
+
+        }
+    
+    }
+    
+    public List<Movie> getMovies() {
+    	return movieSet;
+    }
+    
+    public List<User> getUsers() {
+    	return userSet;
+    }
+    
+    public List<Review> getReviews() {
+    	return reviewSet;
+        }
     //}
     
     public List<Movie> getMovieSet(){
@@ -165,6 +179,14 @@ public class MovieReader {
         System.out.println(x.get(1).getID());
         
         //MovieReader mr = new MovieReader();
+
+        MovieReader x = new MovieReader();
+        System.out.println(x.getMovies().get(7).getId());
+        //System.out.println(movieSet.get(1000).getReviewers().size());
+        //System.out.println(movieSet.get(1998).getReviewers().size());
+
+        //System.out.println(movieSet.get(700).getId());
+
         //MovieReader x = new MovieReader();
     }
 }

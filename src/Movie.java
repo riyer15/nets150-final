@@ -20,19 +20,19 @@ public class Movie {
         return reviews;
     }
 
-    public Set<User> getReviewers() {
-        return reviewers;
-    }
-    
-    public void addReview(Review r, User u) {
-        reviews.add(r);
-        reviewers.add(u);
-    }
-    
-    @Override
-    public boolean equals(Object m) {
-        return this.id.equals(((Movie)m).getId());
-    }
-    
+
+	public Set<User> getReviewers() {
+		return reviewers;
+	}
+	
+	public void addReview(Review r, User u) {
+		reviews.add(r);
+		reviewers.add(u);
+	}
+	
+	@Override
+	public boolean equals(Object m) {
+		return this.id.equals(((Movie)m).getId());
+	}
     
 }
