@@ -94,6 +94,7 @@ public class MovieReader {
                 m = movieSet.get(movieSet.indexOf(m));
             	if(userSet.contains(u)){
             		u = userSet.get(userSet.indexOf(u));
+            		
             		m.addReview(re, u);
             		u.addReview(re);
                 }
@@ -112,9 +113,9 @@ public class MovieReader {
                 	m.addReview(re, u);
                 }
                 else{
-                userSet.add(u);
-                u.addReview(re);
-                m.addReview(re, u);
+                	userSet.add(u);
+                	u.addReview(re);
+                	m.addReview(re, u);
                 }
             }
             
