@@ -45,16 +45,17 @@ public class Review {
         return helpfulness;
     }
     
-    public boolean equals(Review rev1){
-        if(!rev1.getUser().equals(user))
+    @Override
+    public boolean equals(Object rev1){
+        if(!((Review) rev1).getUserID().equals(userID))
             return false;
-        if(!rev1.getMovie().equals(movie))
+        if(!((Review) rev1).getMovie().equals(movie))
             return false;
-        if(!rev1.getText().equals(text))
+        if(!((Review) rev1).getText().equals(text))
             return false;
-        if(!rev1.getRating().equals(rating))
+        if(!((Review) rev1).getRating().equals(rating))
             return false;
-        if(!rev1.getHelpfulness().equals(helpfulness))
+        if(!((Review) rev1).getHelpfulness().equals(helpfulness))
             return false;
         return true;
     }
