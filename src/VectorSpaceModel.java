@@ -45,10 +45,11 @@ public class VectorSpaceModel {
         for (ReviewDoc document : corpus.getReviews()) {
             HashMap<String, Double> weights = new HashMap<String, Double>();
             System.out.println("Stuck yet");
+            System.out.println(terms.size());
             for (String term : terms) {
                 double tf = document.getTermFrequency(term);
                 double idf = corpus.getInverseDocumentFrequency(term);
-                //System.out.println("how bout now");
+                System.out.println("how bout now");
                 double weight = tf * idf;
                 
                 weights.put(term, weight);

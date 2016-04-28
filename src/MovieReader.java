@@ -44,7 +44,7 @@ public class MovieReader {
         //while(x != null){
           //  System.out.println(x);
         int z = 0;
-        while(x != null && z < 2000){
+        while(x != null && z < 2){
             //System.out.println(x);
             //if(x.equals("")){
                 for(int i = 0; i < 8; i++){
@@ -76,7 +76,9 @@ public class MovieReader {
                     x = br1.readLine();
                 }
             Review re = new Review(userID, productID, text, score, helpfulness);
+            System.out.println(re.getUserID());
             User u = new User(userID, mov, rev, profileName);
+           // System.out.println(u.getID());
             Movie m = new Movie(productID, rev, user);
             
             /*
@@ -94,18 +96,28 @@ public class MovieReader {
             	System.out.println(m);
                 m = movieSet.get(movieSet.indexOf(m));
             	if(userSet.contains(u)){
+            	    System.out.println("onee");
             		u = userSet.get(userSet.indexOf(u));
             		m.addReview(re, u);
             		u.addReview(re);
                 }
                 else{
-                    userSet.add(u);
+                    System.out.println("twoo");
+                    System.out.println(u.getID());
+                    //userSet.add(u);
+                    if(u.getID().equals(re.getUserID())){
+                        System.out.println("HEEEEEE");
+                    }
                     u.addReview(re);
-                    m.addReview(re, u);                    
+                    System.out.println(u.getReviews().size());
+                    m.addReview(re, u);  
+                    userSet.add(u);
+                    System.out.println("add" + re.getUserID());
                 }
                 
             }
             else{
+                System.out.println("threee");
                 movieSet.add(m);
                 if(userSet.contains(u)){
                 	u = userSet.get(userSet.indexOf(u));
@@ -113,9 +125,14 @@ public class MovieReader {
                 	m.addReview(re, u);
                 }
                 else{
-                userSet.add(u);
+                    System.out.println("fourr");
+                    System.out.println("add" + re.getUserID());
+
+
+                //userSet.add(u);
                 u.addReview(re);
                 m.addReview(re, u);
+                userSet.add(u);
                 }
             }
             
@@ -135,9 +152,18 @@ public class MovieReader {
         return userSet;
     }
     
+    public List<Review> getReviewSet(){
+        return reviewSet;
+    }
+    
     public static void main(String[]args) throws IOException{
         MovieReader mr = new MovieReader();
         System.out.println("done");
+        List<User> x = mr.getUserSet();
+        System.out.println(x.get(1).getReviews().size());
+        System.out.println(x.get(0).getID());
+        System.out.println(x.get(1).getID());
+        
         //MovieReader mr = new MovieReader();
         //MovieReader x = new MovieReader();
     }

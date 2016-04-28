@@ -20,6 +20,7 @@ public class User {
     
     public void addReview(Review r){
         reviews.add(r);
+        System.out.println("ize" + reviews.size());
         movies.add(r.getMovie());
     }
     
