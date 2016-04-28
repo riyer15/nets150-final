@@ -19,21 +19,37 @@ public class Questions {
 	//mean they will both review Movie D?
 	//
 	public void question1() {
-		
+		for (int i = 0; i < users.size(); i++) {
+			for (int j = i; j < users.size(); j++) {
+				
+			}
+		}
 	}
 	
 	//Question 2: Sam : Does the same reviewer review movies all nicely or 
 	//all harshly (the rating number)?
 	public void question2() {
-		double overall = 0.0;
+		Map<User, Double> stDev = new HashMap<User, Double>();
 		for (User u : users) {
 			double avg = 0.0;
 			for (Review r : u.getReviews()) {
 				avg = avg + Double.parseDouble(r.getRating());
 			}
-			overall = overall + (avg / u.getReviews().size());
+			avg = (avg / u.getReviews().size());
+			
+			double newSum = 0.0;
+			for (Review r2 : u.getReviews()) {
+				newSum = newSum + Math.pow((Double.parseDouble(r2.getRating()) - avg), 2);
+			}
+			newSum = (newSum / u.getReviews().size());
+			
+			stDev.put(u, Math.sqrt(newSum));
+			
+			//System.out.println(u.getID() + "" + Math.sqrt(newSum));
+			System.out.println(u.getReviews().size());
 		}
-		
+		System.out.println(users.size());
+		System.out.println(stDev.keySet().size());
 	}
 	
 	//Question 3: Talia : Do reviewers use similar words in all of their reviews?
@@ -91,9 +107,9 @@ public class Questions {
 	}
 	
 	public static void main(String[]args) throws IOException{
-	    MovieReader m = new MovieReader();
+	    Questions m = new Questions();
 	    System.out.println("GL");
-	    question3(m);
+	    m.question2();
 	    //System.out.println(m.getMovies().size());
 	}
 
