@@ -23,6 +23,14 @@ public class Questions {
 	//Question 2: Sam : Does the same reviewer review movies all nicely or 
 	//all harshly (the rating number)?
 	public void question2() {
+		double overall = 0.0;
+		for (User u : users) {
+			double avg = 0.0;
+			for (Review r : u.getReviews()) {
+				avg = avg + Double.parseDouble(r.getRating());
+			}
+			overall = overall + (avg / u.getReviews().size());
+		}
 		
 	}
 	
