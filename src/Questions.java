@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.List;
+import java.util.*;
 
 public class Questions {
 	
@@ -16,6 +17,7 @@ public class Questions {
 	
 	//Question 1: Sam : If user A and user B both review Movie C, does this 
 	//mean they will both review Movie D?
+	//
 	public void question1() {
 		
 	}
@@ -35,7 +37,38 @@ public class Questions {
 	}
 	
 	//Question 3: Talia : Do reviewers use similar words in all of their reviews?
-	public void question3() {
+	public static void question3(MovieReader m) {
+	    Set<Review> revSet = m.getUserSet().get(1).getReviews();
+	   
+        ArrayList<ReviewDoc> all = new ArrayList<ReviewDoc>();
+        Iterator<Review> iter = revSet.iterator();
+        while(iter.hasNext()){
+            Review x = iter.next();
+            ReviewDoc y = new ReviewDoc(x.getText());
+            all.add(y);
+        }
+        
+       Corpus allRev = new Corpus(all);
+       System.out.println(revSet.size());
+       System.out.println(m.getUserSet().size());
+       System.out.println(m.getMovieSet().size());
+
+        VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
+        double total = 0.0;
+        
+        //all plays considered
+        System.out.println("\nAll plays considered:");
+        for (int i = 0; i < all.size(); i++) {
+            for (int j = i + 1; j < all.size(); j++) {
+                ReviewDoc doc1 = all.get(i);
+                ReviewDoc doc2 = all.get(j);
+                System.out.println("\nComparing " + doc1 + " and " +  doc2);
+                double curr = vectorSpace.cosineSimilarity(doc1, doc2);
+                System.out.println(curr);
+                total += curr;
+            }
+        }
+        
 		
 	}
 	
@@ -55,6 +88,13 @@ public class Questions {
 	//reviews of the same movie, or from all the movie reviews in general?
 	public void quesion6() {
 		
+	}
+	
+	public static void main(String[]args) throws IOException{
+	    MovieReader m = new MovieReader();
+	    System.out.println("GL");
+	    question3(m);
+	    //System.out.println(m.getMovies().size());
 	}
 
 }

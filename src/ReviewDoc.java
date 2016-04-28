@@ -9,10 +9,9 @@ import java.util.Set;
 /**
  * This class represents one document.
  * It will keep track of the term frequencies.
- * @author swapneel
  *
  */
-public class Document implements Comparable<Document> {
+public class ReviewDoc implements Comparable<ReviewDoc>{
     
     /**
      * A hashmap for term frequencies.
@@ -23,7 +22,7 @@ public class Document implements Comparable<Document> {
     /**
      * The name of the file to read.
      */
-    private String filename;
+    private String reviewname;
     
     /**
      * The constructor.
@@ -31,11 +30,11 @@ public class Document implements Comparable<Document> {
      * It will read the file and pre-process it.
      * @param filename the name of the file
      */
-    public Document(String filename) {
-        this.filename = filename;
+    public ReviewDoc(String reviewname) {
+        this.reviewname = reviewname;
         termFrequency = new HashMap<String, Integer>();
         
-        readFileAndPreProcess();
+        readReviewAndPreProcess();
     }
     
     /**
@@ -46,28 +45,25 @@ public class Document implements Comparable<Document> {
      * We don't do any stemming.
      * Once the pre-processing is done, we create and update the 
      */
-    private void readFileAndPreProcess() {
-        try {
-            Scanner in = new Scanner(new File(filename));
-            System.out.println("Reading file: " + filename + " and preprocessing");
+    private void readReviewAndPreProcess() {
+        Scanner in = new Scanner(new String(reviewname));
+        System.out.println("Reading file: " + reviewname + " and preprocessing");
+        
+        while (in.hasNext()) {
+            String nextWord = in.next();
             
-            while (in.hasNext()) {
-                String nextWord = in.next();
-                
-                String filteredWord = nextWord.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
-                
-                if (!(filteredWord.equalsIgnoreCase(""))) {
-                    if (termFrequency.containsKey(filteredWord)) {
-                        int oldCount = termFrequency.get(filteredWord);
-                        termFrequency.put(filteredWord, ++oldCount);
-                    } else {
-                        termFrequency.put(filteredWord, 1);
-                    }
+            String filteredWord = nextWord.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+            
+            if (!(filteredWord.equalsIgnoreCase(""))) {
+                if (termFrequency.containsKey(filteredWord)) {
+                    int oldCount = termFrequency.get(filteredWord);
+                    termFrequency.put(filteredWord, ++oldCount);
+                } else {
+                    termFrequency.put(filteredWord, 1);
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
+
     }
     
     /**
@@ -92,19 +88,19 @@ public class Document implements Comparable<Document> {
         return termFrequency.keySet();
     }
 
-    @Override
+    
     /**
      * The overriden method from the Comparable interface.
      */
-    public int compareTo(Document other) {
-        return filename.compareTo(other.getFileName());
+    public int compareTo(ReviewDoc other) {
+        return reviewname.compareTo(other.getReviewName());
     }
 
     /**
      * @return the filename
      */
-    private String getFileName() {
-        return filename;
+    private String getReviewName() {
+        return reviewname;
     }
     
     /**
@@ -112,6 +108,6 @@ public class Document implements Comparable<Document> {
      * @return the filename
      */
     public String toString() {
-        return filename;
+        return reviewname;
     }
 }

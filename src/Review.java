@@ -1,12 +1,12 @@
 
 public class Review {
-    User user;
-    Movie movie;
-    String userID;
-    String movieID;
-    String text;
-    String rating;
-    String helpfulness;
+    private User user;
+    private Movie movie;
+    private String userID;
+    private String movieID;
+    private String text;
+    private String rating;
+    private String helpfulness;
     
     public Review(String userID, String movieID, String text, String rating,
             String helpfulness){

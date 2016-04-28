@@ -12,12 +12,13 @@ public class MovieReader {
 	 *  Sets don't allow you to find a specific object without using an iterator, (look it up)
 	 * so I changed their representation to Lists. Though the List doesn't guarantee 
 	 * uniqueness, we check for pre-existence in our code when we 
-	 * create our objects, so the list implementation is basically unique anyway.
+	 * create our objects, so the list implementation is basically unique anyway. 
+	 * - Rani 
 	 */
     private List<Movie> movieSet; 
     private List<User> userSet;
     private List<Review> reviewSet;
-    
+
     public MovieReader() throws IOException{
         movieSet = new ArrayList<Movie>(); 
         userSet = new ArrayList<User>();
@@ -38,12 +39,15 @@ public class MovieReader {
         Set<User> user = new HashSet<User>();
         Set<Movie> mov = new HashSet<Movie>();
 
+
+        //while(x != null){
+          //  System.out.println(x);
         int z = 0;
         while(x != null && z < 2000){
             //System.out.println(x);
             //if(x.equals("")){
                 for(int i = 0; i < 8; i++){
-                    //System.out.println(x);
+                    System.out.println(x);
                     if(x.contains("productId")){
                         productID = x.substring(x.indexOf(" ") + 1);
                     }
@@ -82,7 +86,8 @@ public class MovieReader {
              * Review C to Movie A, Movie A in User B's list will have has Review C. 
              * That's why fact that some of the objects are incomplete when we add them
              * to the list isn't that big of a deal -- updates to one object are reflected
-             * in all their associated objects. 
+             * in all their associated objects. Text me if you're still confused (or maybe
+             * look up the 120 Notes?) - Rani 
              */
             if(movieSet.contains(m)){
             	System.out.println(m);
@@ -119,8 +124,9 @@ public class MovieReader {
             x = br1.readLine();
 
            // System.out.println(score);
+
         }
-        
+    
     }
     
     public List<Movie> getMovies() {
@@ -133,19 +139,28 @@ public class MovieReader {
     
     public List<Review> getReviews() {
     	return reviewSet;
+        }
+    //}
+    
+    public List<Movie> getMovieSet(){
+        return movieSet;
+    }
+    public List<User> getUserSet(){
+        return userSet;
     }
     
     public static void main(String[]args) throws IOException{
-        System.out.println("here");
+        MovieReader mr = new MovieReader();
+        System.out.println("done");
         //MovieReader mr = new MovieReader();
+
         MovieReader x = new MovieReader();
         System.out.println(x.getMovies().get(7).getId());
         //System.out.println(movieSet.get(1000).getReviewers().size());
         //System.out.println(movieSet.get(1998).getReviewers().size());
 
         //System.out.println(movieSet.get(700).getId());
-        System.out.println(x.getMovies().get(500).getId());
-        System.out.println(x.getMovies().get(501).getId());
-        System.out.println(x.getMovies().get(502).getId());
+
+        //MovieReader x = new MovieReader();
     }
 }
