@@ -44,6 +44,7 @@ public class Review {
     public String getHelpfulness(){
         return helpfulness;
     }
+
     @Override
     public boolean equals(Object rev1){
         if(!((Review) rev1).getUserID().equals(userID))

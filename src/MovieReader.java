@@ -180,8 +180,8 @@ public class MovieReader {
         
         //MovieReader mr = new MovieReader();
 
-        MovieReader x = new MovieReader();
-        System.out.println(x.getMovies().get(7).getId());
+        //MovieReader x = new MovieReader();
+        //System.out.println(x.getMovies().get(7).getId());
         //System.out.println(movieSet.get(1000).getReviewers().size());
         //System.out.println(movieSet.get(1998).getReviewers().size());
 
