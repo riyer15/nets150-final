@@ -60,14 +60,15 @@ public class Questions {
         Iterator<Review> iter = revSet.iterator();
         while(iter.hasNext()){
             Review x = iter.next();
+            System.out.println(x.getText());
             ReviewDoc y = new ReviewDoc(x.getText());
             all.add(y);
         }
         
        Corpus allRev = new Corpus(all);
-       System.out.println(revSet.size());
-       System.out.println(m.getUserSet().size());
-       System.out.println(m.getMovieSet().size());
+       //System.out.println(revSet.size());
+       //System.out.println(m.getUserSet().size());
+       //System.out.println(m.getMovieSet().size());
 
         VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
         double total = 0.0;
@@ -78,6 +79,11 @@ public class Questions {
             for (int j = i + 1; j < all.size(); j++) {
                 ReviewDoc doc1 = all.get(i);
                 ReviewDoc doc2 = all.get(j);
+                
+                    System.out.println(doc1.getTermList().size());
+                    System.out.println(doc2.getTermList().size());
+                    
+                
                 System.out.println("\nComparing " + doc1 + " and " +  doc2);
                 double curr = vectorSpace.cosineSimilarity(doc1, doc2);
                 System.out.println(curr);
