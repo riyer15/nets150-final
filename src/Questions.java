@@ -20,19 +20,25 @@ public class Questions {
 	//
 	public void question1() {
 		int countTotal = 0;
+		int count = 0;
 		for (int i = 0; i < users.size(); i++) {
 			for (int j = i; j < users.size(); j++) {
 				for (Movie m1 : users.get(i).getMovies()) {
 					for (Movie m2 : users.get(j).getMovies()) {
-						System.out.println(users.get(i).getMovies());
-						if (m1.equals(m2)) {
+						//System.out.println(users.get(j).getMovies());
+						if (m1 != null && m2 != null && m1.equals(m2)) {
 							countTotal++;
+						}
+						if (m1 != null && m2 != null) {
+							count++;
 						}
 					}
 				}
 			}
 		}
-		double percent = ((double) countTotal) / ((double) movies.size());
+		
+		double percent = ((double) countTotal) / ((double) count);
+		System.out.println(percent);
 	}
 	
 	//Question 2: Sam : Does the same reviewer review movies all nicely or 
@@ -40,25 +46,29 @@ public class Questions {
 	public void question2() {
 		Map<User, Double> stDev = new HashMap<User, Double>();
 		for (User u : users) {
-			double avg = 0.0;
-			for (Review r : u.getReviews()) {
-				avg = avg + Double.parseDouble(r.getRating());
+			if (u.getReviews().size() > 1) {
+				double avg = 0.0;
+				for (Review r : u.getReviews()) {
+					avg = avg + Double.parseDouble(r.getRating());
+				}
+				avg = (avg / u.getReviews().size());
+				
+				double newSum = 0.0;
+				for (Review r2 : u.getReviews()) {
+					newSum = newSum + Math.pow((Double.parseDouble(r2.getRating()) - avg), 2);
+				}
+				newSum = (newSum / u.getReviews().size());
+				
+				stDev.put(u, Math.sqrt(newSum));
 			}
-			avg = (avg / u.getReviews().size());
-			
-			double newSum = 0.0;
-			for (Review r2 : u.getReviews()) {
-				newSum = newSum + Math.pow((Double.parseDouble(r2.getRating()) - avg), 2);
-			}
-			newSum = (newSum / u.getReviews().size());
-			
-			stDev.put(u, Math.sqrt(newSum));
-			
-			//System.out.println(u.getID() + "" + Math.sqrt(newSum));
-			System.out.println(u.getReviews().size());
 		}
-		System.out.println(users.size());
-		System.out.println(stDev.keySet().size());
+		double count = 0.0;
+		for (double d : stDev.values()) {
+			count = count + d;
+		}
+		
+		double avgStDev = count / ((double) stDev.keySet().size());
+		System.out.println(avgStDev);
 	}
 	
 	//Question 3: Talia : Do reviewers use similar words in all of their reviews?
@@ -124,7 +134,7 @@ public class Questions {
 	public static void main(String[]args) throws IOException{
 	    Questions m = new Questions();
 	    System.out.println("GL");
-	    m.question1();
+	    m.question2();
 	    //System.out.println(m.getMovies().size());
 	}
 
