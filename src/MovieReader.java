@@ -84,6 +84,7 @@ public class MovieReader {
                     u = userSet.get(userSet.indexOf(u));
                     m.addReview(re, u);
                     u.addReview(re);
+                    u.addMovie(m);
                 }
                 else{
                     //System.out.println(u.getID());
@@ -92,6 +93,7 @@ public class MovieReader {
                     u.addReview(re);
                     System.out.println(u.getReviews().size());
                     m.addReview(re, u);  
+                    u.addMovie(m);
                     userSet.add(u);
                     System.out.println("add" + re.getUserID());
                 }
@@ -104,6 +106,7 @@ public class MovieReader {
                     u = userSet.get(userSet.indexOf(u));
                     u.addReview(re);
                     m.addReview(re, u);
+                    u.addMovie(m);
          
                 }
                 else{
@@ -113,6 +116,7 @@ public class MovieReader {
                 //userSet.add(u);
                 u.addReview(re);
                 m.addReview(re, u);
+                u.addMovie(m);
                 userSet.add(u);
                 }
             }
@@ -161,11 +165,6 @@ public class MovieReader {
        // System.out.println("u2\n" + x.get(1).getReviews());        
         //MovieReader mr = new MovieReader();
 
-        Iterator<User> iter = mr.getUserSet().iterator();
-        while(iter.hasNext()){
-            User y = iter.next();
-            System.out.println("T" + y.getReviews().size());
-        }
         //MovieReader x = new MovieReader();
         //System.out.println(x.getMovies().get(7).getId());
         //System.out.println(movieSet.get(1000).getReviewers().size());
