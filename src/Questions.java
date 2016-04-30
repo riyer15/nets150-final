@@ -24,7 +24,7 @@ public class Questions {
 			for (int j = i; j < users.size(); j++) {
 				for (Movie m1 : users.get(i).getMovies()) {
 					for (Movie m2 : users.get(j).getMovies()) {
-						System.out.println(users.get(j).getMovies());
+						System.out.println(users.get(i).getMovies());
 						if (m1.equals(m2)) {
 							countTotal++;
 						}
