@@ -35,7 +35,7 @@ public class MovieReader {
         String time = "";
         String summary = "";
         String text = "";
-        Set<Review> rev = new HashSet<Review>();
+        //Set<Review> rev = new HashSet<Review>();
         Set<User> user = new HashSet<User>();
         Set<Movie> mov = new HashSet<Movie>();
 
@@ -76,9 +76,11 @@ public class MovieReader {
                 }
             Review re = new Review(userID, productID, text, score, helpfulness);
             System.out.println(re.getUserID());
-            User u = new User(userID, mov, rev, profileName);
+            //User u = new User(userID, mov, rev, profileName);
+            User u = null;
+            Movie m = null;
            // System.out.println(u.getID());
-            Movie m = new Movie(productID, rev, user);
+            //Movie m = new Movie(productID, new HashSet<Review>(), user);
             
             /*
              * For this part: keep in mind that once we add an object to
@@ -91,22 +93,18 @@ public class MovieReader {
              * in all their associated objects. Text me if you're still confused (or maybe
              * look up the 120 Notes?) - Rani 
              */
-            if(movieSet.contains(m)){
-            	System.out.println(m);
-                m = movieSet.get(movieSet.indexOf(m));
-            	if(userSet.contains(u)){
-            	    System.out.println("onee");
-            		u = userSet.get(userSet.indexOf(u));
+            if(movieSet.contains(productID)){
+            	//System.out.println(m);
+            	m = movieSet.get(movieSet.indexOf(productID));
+            	if(userSet.contains(userID)){
+            		u = userSet.get(userSet.indexOf(userID));
             		m.addReview(re, u);
             		u.addReview(re);
                 }
                 else{
-                    System.out.println("twoo");
-                    System.out.println(u.getID());
+                    //System.out.println(u.getID());
                     //userSet.add(u);
-                    if(u.getID().equals(re.getUserID())){
-                        System.out.println("HEEEEEE");
-                    }
+                    u = new User(userID, mov, new HashSet<Review>(), profileName);
                     u.addReview(re);
                     System.out.println(u.getReviews().size());
                     m.addReview(re, u);  
@@ -116,16 +114,17 @@ public class MovieReader {
                 
             }
             else{
-                System.out.println("threee");
+                m = new Movie(productID, new HashSet<Review>(), user);
                 movieSet.add(m);
-                if(userSet.contains(u)){
-                	u = userSet.get(userSet.indexOf(u));
+                if(userSet.contains(userID)){
+                	u = userSet.get(userSet.indexOf(userID));
                 	u.addReview(re);
                 	m.addReview(re, u);
+         
                 }
                 else{
-                    System.out.println("fourr");
                     System.out.println("add" + re.getUserID());
+                    u = new User(userID, mov, new HashSet<Review>(), profileName);
 
 
                 //userSet.add(u);
@@ -175,11 +174,15 @@ public class MovieReader {
         System.out.println("done");
         List<User> x = mr.getUserSet();
         System.out.println(x.get(1).getReviews().size());
-        System.out.println(x.get(0).getID());
-        System.out.println(x.get(1).getID());
-        
+        //System.out.println("u1\n" + x.get(0).getReviews());
+       // System.out.println("u2\n" + x.get(1).getReviews());        
         //MovieReader mr = new MovieReader();
 
+        Iterator<Movie> iter = mr.getMovieSet().iterator();
+        while(iter.hasNext()){
+            Movie y = iter.next();
+            System.out.println(y.getReviews().size());
+        }
         //MovieReader x = new MovieReader();
         //System.out.println(x.getMovies().get(7).getId());
         //System.out.println(movieSet.get(1000).getReviewers().size());
