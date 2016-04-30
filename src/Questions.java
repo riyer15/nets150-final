@@ -19,11 +19,20 @@ public class Questions {
 	//mean they will both review Movie D?
 	//
 	public void question1() {
+		int countTotal = 0;
 		for (int i = 0; i < users.size(); i++) {
 			for (int j = i; j < users.size(); j++) {
-				
+				for (Movie m1 : users.get(i).getMovies()) {
+					for (Movie m2 : users.get(j).getMovies()) {
+						System.out.println(users.get(j).getMovies());
+						if (m1.equals(m2)) {
+							countTotal++;
+						}
+					}
+				}
 			}
 		}
+		double percent = ((double) countTotal) / ((double) movies.size());
 	}
 	
 	//Question 2: Sam : Does the same reviewer review movies all nicely or 
@@ -115,7 +124,7 @@ public class Questions {
 	public static void main(String[]args) throws IOException{
 	    Questions m = new Questions();
 	    System.out.println("GL");
-	    m.question2();
+	    m.question1();
 	    //System.out.println(m.getMovies().size());
 	}
 

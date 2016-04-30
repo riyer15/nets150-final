@@ -93,11 +93,14 @@ public class MovieReader {
              * in all their associated objects. Text me if you're still confused (or maybe
              * look up the 120 Notes?) - Rani 
              */
+
             if(movieSet.contains(productID)){
             	//System.out.println(m);
             	m = movieSet.get(movieSet.indexOf(productID));
             	if(userSet.contains(userID)){
             		u = userSet.get(userSet.indexOf(userID));
+            
+            		
             		m.addReview(re, u);
             		u.addReview(re);
                 }
