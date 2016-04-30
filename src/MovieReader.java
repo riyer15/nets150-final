@@ -6,15 +6,7 @@ import java.io.Reader;
 import java.util.*;
 
 public class MovieReader {
-	/*For later parts in the code, we need to access previously made movie/
-	 * user/review objects. We can't just add our "dummy" objects because 
-	 * then we lose all the data we're storing (specifically in their adjacency lists)
-	 *  Sets don't allow you to find a specific object without using an iterator, (look it up)
-	 * so I changed their representation to Lists. Though the List doesn't guarantee 
-	 * uniqueness, we check for pre-existence in our code when we 
-	 * create our objects, so the list implementation is basically unique anyway. 
-	 * - Rani 
-	 */
+   
     private List<Movie> movieSet; 
     private List<User> userSet;
     private List<Review> reviewSet;
@@ -43,7 +35,7 @@ public class MovieReader {
         //while(x != null){
           //  System.out.println(x);
         int z = 0;
-        while(x != null && z < 2){
+        while(x != null && z < 10000){
             //System.out.println(x);
             //if(x.equals("")){
                 for(int i = 0; i < 8; i++){
@@ -77,37 +69,26 @@ public class MovieReader {
             Review re = new Review(userID, productID, text, score, helpfulness);
             System.out.println(re.getUserID());
             //User u = new User(userID, mov, rev, profileName);
-            User u = null;
-            Movie m = null;
+            User u = new User(userID, profileName);
+            Movie m = new Movie(productID);
+            
            // System.out.println(u.getID());
             //Movie m = new Movie(productID, new HashSet<Review>(), user);
             
-            /*
-             * For this part: keep in mind that once we add an object to
-             * another object's adjacency lists, any changes we made to the first 
-             * object *will* be updated in the other object's list, because we're passing
-             * by reference. For example, if I add a Movie A to a User B, and then add
-             * Review C to Movie A, Movie A in User B's list will have has Review C. 
-             * That's why fact that some of the objects are incomplete when we add them
-             * to the list isn't that big of a deal -- updates to one object are reflected
-             * in all their associated objects. Text me if you're still confused (or maybe
-             * look up the 120 Notes?) - Rani 
-             */
-
-            if(movieSet.contains(productID)){
-            	//System.out.println(m);
-            	m = movieSet.get(movieSet.indexOf(productID));
-            	if(userSet.contains(userID)){
-            		u = userSet.get(userSet.indexOf(userID));
-            
-            		
-            		m.addReview(re, u);
-            		u.addReview(re);
+          
+            if(movieSet.contains(m)){
+                System.out.println("please");
+                //System.out.println(m);
+                m = movieSet.get(movieSet.indexOf(m));
+                if(userSet.contains(u)){
+                    u = userSet.get(userSet.indexOf(u));
+                    m.addReview(re, u);
+                    u.addReview(re);
                 }
                 else{
                     //System.out.println(u.getID());
                     //userSet.add(u);
-                    u = new User(userID, mov, new HashSet<Review>(), profileName);
+                    
                     u.addReview(re);
                     System.out.println(u.getReviews().size());
                     m.addReview(re, u);  
@@ -117,17 +98,16 @@ public class MovieReader {
                 
             }
             else{
-                m = new Movie(productID, new HashSet<Review>(), user);
+                //m = new Movie(productID, new HashSet<Review>(), user);
                 movieSet.add(m);
-                if(userSet.contains(userID)){
-                	u = userSet.get(userSet.indexOf(userID));
-                	u.addReview(re);
-                	m.addReview(re, u);
+                if(userSet.contains(u)){
+                    u = userSet.get(userSet.indexOf(u));
+                    u.addReview(re);
+                    m.addReview(re, u);
          
                 }
                 else{
                     System.out.println("add" + re.getUserID());
-                    u = new User(userID, mov, new HashSet<Review>(), profileName);
 
 
                 //userSet.add(u);
@@ -149,15 +129,15 @@ public class MovieReader {
     }
     
     public List<Movie> getMovies() {
-    	return movieSet;
+        return movieSet;
     }
     
     public List<User> getUsers() {
-    	return userSet;
+        return userSet;
     }
     
     public List<Review> getReviews() {
-    	return reviewSet;
+        return reviewSet;
         }
     //}
     
@@ -181,10 +161,10 @@ public class MovieReader {
        // System.out.println("u2\n" + x.get(1).getReviews());        
         //MovieReader mr = new MovieReader();
 
-        Iterator<Movie> iter = mr.getMovieSet().iterator();
+        Iterator<User> iter = mr.getUserSet().iterator();
         while(iter.hasNext()){
-            Movie y = iter.next();
-            System.out.println(y.getReviews().size());
+            User y = iter.next();
+            System.out.println("T" + y.getReviews().size());
         }
         //MovieReader x = new MovieReader();
         //System.out.println(x.getMovies().get(7).getId());

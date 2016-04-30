@@ -1,4 +1,4 @@
-import java.util.Set;
+import java.util.*;
 
 public class Movie {
     
@@ -6,10 +6,10 @@ public class Movie {
     private Set<Review> reviews;
     private Set<User> reviewers;
     
-    public Movie(String id, Set<Review> reviews, Set<User> reviewers) {
+    public Movie(String id) {
         this.id = id;
-        this.reviews = reviews;
-        this.reviewers = reviewers;
+        this.reviews = new HashSet<Review>();
+        this.reviewers = new HashSet<User>();
     }
     
     public String getId() {
@@ -32,7 +32,7 @@ public class Movie {
 	
 	@Override
 	public boolean equals(Object m) {
-		return this.id.equals((String)m);
+		return this.id.equals(((Movie)m).getId());
 	}
     
 }

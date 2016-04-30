@@ -1,4 +1,4 @@
-import java.util.Set;
+import java.util.*;
 
 public class User {
     
@@ -7,10 +7,10 @@ public class User {
     private String userID;
     private String profileName;
     
-    public User(String id, Set<Movie> m, Set<Review> r, String pn){
+    public User(String id, String pn){
         userID = id;
-        movies = m;
-        reviews = r;
+        movies = new HashSet<Movie>();
+        reviews = new HashSet<Review>();
         profileName = pn;
     }
     
