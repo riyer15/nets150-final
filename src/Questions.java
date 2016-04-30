@@ -63,48 +63,104 @@ public class Questions {
 	
 	//Question 3: Talia : Do reviewers use similar words in all of their reviews?
 	public static void question3(MovieReader m) {
-	    Set<Review> revSet = m.getUserSet().get(1).getReviews();
-	   
-        ArrayList<ReviewDoc> all = new ArrayList<ReviewDoc>();
-        Iterator<Review> iter = revSet.iterator();
-        while(iter.hasNext()){
-            Review x = iter.next();
-            System.out.println(x.getText());
-            ReviewDoc y = new ReviewDoc(x.getText());
-            all.add(y);
-        }
-        
-       Corpus allRev = new Corpus(all);
-       //System.out.println(revSet.size());
-       System.out.println("number of users" + m.getUserSet().size());
-       //System.out.println(m.getMovieSet().size());
+	    double totalAvg = 0.0;
+	    double curAvg = 0.0;
+	    List<User> userSet = m.getUserSet();
+	    Iterator<User> iter2 = userSet.iterator();
+	    int ctr = 0;
+	    while(iter2.hasNext()){
+	        User u = iter2.next();
+	        if(u.getReviews().size()>2){
+	            ctr++;
+	            curAvg = 0.0;
+	            double curSize = u.getReviews().size();
+	            ArrayList<ReviewDoc> all = new ArrayList<ReviewDoc>();
+	            Iterator<Review> iter = u.getReviews().iterator();
+	            while(iter.hasNext()){
+	                Review x = iter.next();
+	                ReviewDoc y = new ReviewDoc(x.getText());
+	                all.add(y);
+	            }
+	            
+	           Corpus allRev = new Corpus(all);
 
-        VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
-        double total = 0.0;
-        
-        //all plays considered
-        System.out.println("\nAll plays considered:");
-        for (int i = 0; i < all.size(); i++) {
-            for (int j = i + 1; j < all.size(); j++) {
-                ReviewDoc doc1 = all.get(i);
-                ReviewDoc doc2 = all.get(j);
-                
-                    System.out.println(doc1.getTermList().size());
-                    System.out.println(doc2.getTermList().size());
-                    
-                
-                System.out.println("\nComparing " + doc1 + " and " +  doc2);
-                double curr = vectorSpace.cosineSimilarity(doc1, doc2);
-                System.out.println(curr);
-                total += curr;
-            }
-        }
-        
+
+	            VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
+	            double total = 0.0;
+	            
+	            //all plays considered
+	            System.out.println("\nAll plays considered:");
+	            for (int i = 0; i < all.size(); i++) {
+	                for (int j = i + 1; j < all.size(); j++) {
+	                    ReviewDoc doc1 = all.get(i);
+	                    ReviewDoc doc2 = all.get(j);
+	                    
+	                    System.out.println("\nComparing " + doc1 + " and " +  doc2);
+	                    double curr = vectorSpace.cosineSimilarity(doc1, doc2);
+	                    System.out.println(curr);
+	                    total += curr;
+	                    curAvg += curr;
+	                }
+	            }
+	            curAvg = total/all.size();
+	            totalAvg += curAvg;
+
+	        }
+	    }
+	    System.out.println(ctr);
+	    System.out.println(totalAvg/((double)ctr));
+
 		
 	}
 	
 	//Question 4: Talia : Do all the reviewers reviewing movie A use similar words to describe them?
 	public void question4() {
+	    double totalAvg = 0.0;
+        double curAvg = 0.0;
+        
+        Iterator<Movie> iter2 = movies.iterator();
+        int ctr = 0;
+        while(iter2.hasNext()){
+            Movie u = iter2.next();
+            if(u.getReviews().size()>2){
+                ctr++;
+                curAvg = 0.0;
+                double curSize = u.getReviews().size();
+                ArrayList<ReviewDoc> all = new ArrayList<ReviewDoc>();
+                Iterator<Review> iter = u.getReviews().iterator();
+                while(iter.hasNext()){
+                    Review x = iter.next();
+                    ReviewDoc y = new ReviewDoc(x.getText());
+                    all.add(y);
+                }
+                
+               Corpus allRev = new Corpus(all);
+
+
+                VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
+                double total = 0.0;
+                
+                //all plays considered
+                System.out.println("\nAll plays considered:");
+                for (int i = 0; i < all.size(); i++) {
+                    for (int j = i + 1; j < all.size(); j++) {
+                        ReviewDoc doc1 = all.get(i);
+                        ReviewDoc doc2 = all.get(j);
+                        
+                        System.out.println("\nComparing " + doc1 + " and " +  doc2);
+                        double curr = vectorSpace.cosineSimilarity(doc1, doc2);
+                        System.out.println(curr);
+                        total += curr;
+                        curAvg += curr;
+                    }
+                }
+                curAvg = total/all.size();
+                totalAvg += curAvg;
+
+            }
+        }
+        System.out.println(ctr);
+        System.out.println(totalAvg/((double)ctr));
 		
 	}
 	
@@ -124,8 +180,9 @@ public class Questions {
 	public static void main(String[]args) throws IOException{
 	    Questions m = new Questions();
 	    System.out.println("GL");
-	    m.question1();
+	    //m.question3(new MovieReader());
 	    //System.out.println(m.getMovies().size());
+	    m.question4();
 	}
 
 }
