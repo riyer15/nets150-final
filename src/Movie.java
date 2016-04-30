@@ -32,7 +32,7 @@ public class Movie {
 	
 	@Override
 	public boolean equals(Object m) {
-		return this.id.equals(((Movie)m).getId());
+		return this.id.equals((String)m);
 	}
     
 }

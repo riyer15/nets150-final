@@ -76,7 +76,7 @@ public class Questions {
         
        Corpus allRev = new Corpus(all);
        //System.out.println(revSet.size());
-       //System.out.println(m.getUserSet().size());
+       System.out.println("number of users" + m.getUserSet().size());
        //System.out.println(m.getMovieSet().size());
 
         VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
