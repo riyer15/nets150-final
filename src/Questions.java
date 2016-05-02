@@ -25,7 +25,6 @@ public class Questions {
 			for (int j = i; j < users.size(); j++) {
 				for (Movie m1 : users.get(i).getMovies()) {
 					for (Movie m2 : users.get(j).getMovies()) {
-						//System.out.println(users.get(j).getMovies());
 						if (m1 != null && m2 != null && m1.equals(m2)) {
 							countTotal++;
 						}
@@ -220,24 +219,12 @@ public class Questions {
 		
 	}
 	
-	//Question 5: Rani : Does the helpfulness of the review correspond to the 
-	//style (negativity/positivity) of which the review is written?
-	public void question5() {
-		
-	}
-	
-	//Question 6: Rani : Choose a movie: what are trends we notice about the 
-	//words used in describing the movie? Are these trends picked up from other 
-	//reviews of the same movie, or from all the movie reviews in general?
-	public void quesion6() {
-		
-	}
 	
 	public static void main(String[]args) throws Exception{
 	    Questions m = new Questions();
 
-	    //System.out.println(m.getMovies().size());
-	    m.question3();
+	    System.out.println("GL");
+	    m.question4();
 	}
 
 }
