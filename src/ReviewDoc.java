@@ -50,7 +50,7 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
      */
     private void readReviewAndPreProcess() {
         Scanner in = new Scanner(new String(reviewname));
-        System.out.println("Reading file: " + reviewname + " and preprocessing");
+        //System.out.println("Reading file: " + reviewname + " and preprocessing");
         
         while (in.hasNext()) {
             String nextWord = in.next();

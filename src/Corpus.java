@@ -40,7 +40,7 @@ public class Corpus {
      * This method will create an inverted index.
      */
     private void createInvertedIndex() {
-        System.out.println("Creating the inverted index");
+        //System.out.println("Creating the inverted index");
         
         for (ReviewDoc rev : reviews) {
             Set<String> terms = rev.getTermList();
