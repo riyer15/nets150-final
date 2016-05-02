@@ -113,20 +113,5 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
     public String toString() {
         return reviewname;
     }
-    
 
-    public static void main(String[]args) throws IOException{
-        MovieReader y = new MovieReader();
-        Set<Review> t = y.getUserSet().get(2).getReviews();
-        System.out.println(t.size());
-
-        Iterator<Review> iter = t.iterator();
-        while(iter.hasNext()){
-            Review r = iter.next();
-            System.out.println(r.getUser().getID());
-        }
-        //System.out.println(t.size());
-        //ReviewDoc x = new ReviewDoc(t.);
-        //System.out.println(x.getTermList().size());
-    }
 }

@@ -28,19 +28,15 @@ public class MovieReader {
         String time = "";
         String summary = "";
         String text = "";
-        //Set<Review> rev = new HashSet<Review>();
         Set<User> user = new HashSet<User>();
         Set<Movie> mov = new HashSet<Movie>();
 
-
-        //while(x != null){
-          //  System.out.println(x);
+        //keeps track of how many reviews we have looked at to stay under 10000
         int z = 0;
         while(x != null && z < 10000){
-            //System.out.println(x);
-            //if(x.equals("")){
+        		//reads each line for a specific part of the review to store 
+        		//the entire review as a whole
                 for(int i = 0; i < 8; i++){
-                    System.out.println(x);
                     if(x.contains("productId")){
                         productID = x.substring(x.indexOf(" ") + 1);
                     }
@@ -67,112 +63,75 @@ public class MovieReader {
                     }
                     x = br1.readLine();
                 }
+            //creates the objects
             Review re = new Review(userID, productID, text, score, helpfulness);
-            System.out.println(re.getUserID());
-            //User u = new User(userID, mov, rev, profileName);
             User u = new User(userID, profileName);
             Movie m = new Movie(productID);
             
-           // System.out.println(u.getID());
-            //Movie m = new Movie(productID, new HashSet<Review>(), user);
-            
-          
+            //checks to see if we have the movie already
             if(movieSet.contains(m)){
-                System.out.println("please");
-                //System.out.println(m);
                 m = movieSet.get(movieSet.indexOf(m));
+                
+                //checks to see if we have the user already
                 if(userSet.contains(u)){
                     u = userSet.get(userSet.indexOf(u));
+                    
+                    //add information into our sets
                     m.addReview(re, u);
                     u.addReview(re);
                     u.addMovie(m);
                 }
                 else{
-                    //System.out.println(u.getID());
-                    //userSet.add(u);
-                    
+                	//we add the information to our sets and add the user to the 
+                	//user set
                     u.addReview(re);
-                    System.out.println(u.getReviews().size());
                     m.addReview(re, u);  
                     u.addMovie(m);
                     userSet.add(u);
-                    System.out.println("add" + re.getUserID());
                 }
                 
             }
             else{
-                //m = new Movie(productID, new HashSet<Review>(), user);
+                //add the movie to our set
                 movieSet.add(m);
+                
+                //check to see if we have the user already
                 if(userSet.contains(u)){
                     u = userSet.get(userSet.indexOf(u));
+                    
+                    //add new information in 
                     u.addReview(re);
                     m.addReview(re, u);
                     u.addMovie(m);
-         
                 }
                 else{
-                    System.out.println("add" + re.getUserID());
-
-
-                //userSet.add(u);
-                u.addReview(re);
-                m.addReview(re, u);
-                u.addMovie(m);
-                userSet.add(u);
+                	//add new information and add the new user to set
+                	u.addReview(re);
+                	m.addReview(re, u);
+                	u.addMovie(m);
+                	userSet.add(u);
                 }
             }
             
-               // }
-           // }
             z++;
             x = br1.readLine();
-
-           // System.out.println(score);
 
         }
     
     }
     
+    //return the set of all movies
     public List<Movie> getMovies() {
         return movieSet;
     }
     
+    //return the set of all users
     public List<User> getUsers() {
         return userSet;
     }
     
+    //return the set of all reviews
     public List<Review> getReviews() {
         return reviewSet;
-        }
-    //}
-    
-    public List<Movie> getMovieSet(){
-        return movieSet;
-    }
-    public List<User> getUserSet(){
-        return userSet;
-    }
-    
-    public List<Review> getReviewSet(){
-        return reviewSet;
-    }
-    
-    public static void main(String[]args) throws IOException{
-        MovieReader mr = new MovieReader();
-        System.out.println("done");
-        List<User> x = mr.getUserSet();
-        System.out.println(x.get(1).getReviews().size());
-        //System.out.println("u1\n" + x.get(0).getReviews());
-       // System.out.println("u2\n" + x.get(1).getReviews());        
-        //MovieReader mr = new MovieReader();
-
-        //MovieReader x = new MovieReader();
-        //System.out.println(x.getMovies().get(7).getId());
-        //System.out.println(movieSet.get(1000).getReviewers().size());
-        //System.out.println(movieSet.get(1998).getReviewers().size());
-
-        //System.out.println(movieSet.get(700).getId());
-
-        //MovieReader x = new MovieReader();
     }
 }

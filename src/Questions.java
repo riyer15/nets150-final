@@ -21,6 +21,8 @@ public class Questions {
 	public void question1() {
 		int countTotal = 0;
 		int count = 0;
+		
+		//makes the comparison
 		for (int i = 0; i < users.size(); i++) {
 			for (int j = i; j < users.size(); j++) {
 				for (Movie m1 : users.get(i).getMovies()) {
@@ -36,6 +38,7 @@ public class Questions {
 			}
 		}
 		
+		//finds the percent
 		double percent = ((double) countTotal) / ((double) count);
 		System.out.println(percent);
 	}
@@ -44,6 +47,8 @@ public class Questions {
 	//all harshly (the rating number)?
 	public void question2() {
 		Map<User, Double> stDev = new HashMap<User, Double>();
+		
+		//finds the standard deviation of each user and puts it in the map
 		for (User u : users) {
 			if (u.getReviews().size() > 1) {
 				double avg = 0.0;
@@ -61,6 +66,7 @@ public class Questions {
 				stDev.put(u, Math.sqrt(newSum));
 			}
 		}
+		//finds the average
 		double count = 0.0;
 		for (double d : stDev.values()) {
 			count = count + d;
@@ -74,7 +80,7 @@ public class Questions {
 	public static void question3(MovieReader m) {
 	    double totalAvg = 0.0;
 	    double curAvg = 0.0;
-	    List<User> userSet = m.getUserSet();
+	    List<User> userSet = m.getUsers();
 	    Iterator<User> iter2 = userSet.iterator();
 	    int ctr = 0;
 	    while(iter2.hasNext()){
@@ -176,7 +182,8 @@ public class Questions {
 	
 	public static void main(String[]args) throws IOException{
 	    Questions m = new Questions();
-	    System.out.println("GL");
+	    m.question1();
+	    m.question2();
 	    m.question4();
 	}
 
