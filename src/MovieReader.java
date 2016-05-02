@@ -11,7 +11,8 @@ public class MovieReader {
     private List<User> userSet;
     private List<Review> reviewSet;
 
-    public MovieReader() throws IOException{
+    @SuppressWarnings({ "resource", "unused" })
+	public MovieReader() throws IOException{
         movieSet = new ArrayList<Movie>(); 
         userSet = new ArrayList<User>();
         reviewSet = new ArrayList<Review>();
