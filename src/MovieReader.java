@@ -77,7 +77,6 @@ public class MovieReader {
             
           
             if(movieSet.contains(m)){
-                System.out.println("please");
                 //System.out.println(m);
                 m = movieSet.get(movieSet.indexOf(m));
                 if(userSet.contains(u)){
@@ -91,11 +90,9 @@ public class MovieReader {
                     //userSet.add(u);
                     
                     u.addReview(re);
-                    System.out.println(u.getReviews().size());
                     m.addReview(re, u);  
                     u.addMovie(m);
                     userSet.add(u);
-                    System.out.println("add" + re.getUserID());
                 }
                 
             }
@@ -110,7 +107,6 @@ public class MovieReader {
          
                 }
                 else{
-                    System.out.println("add" + re.getUserID());
 
 
                 //userSet.add(u);

@@ -50,7 +50,7 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
      */
     private void readReviewAndPreProcess() {
         Scanner in = new Scanner(new String(reviewname));
-        System.out.println("Reading file: " + reviewname + " and preprocessing");
+        //System.out.println("Reading file: " + reviewname + " and preprocessing");
         
         while (in.hasNext()) {
             String nextWord = in.next();
@@ -118,12 +118,12 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
     public static void main(String[]args) throws IOException{
         MovieReader y = new MovieReader();
         Set<Review> t = y.getUserSet().get(2).getReviews();
-        System.out.println(t.size());
+        //System.out.println(t.size());
 
         Iterator<Review> iter = t.iterator();
         while(iter.hasNext()){
             Review r = iter.next();
-            System.out.println(r.getUser().getID());
+            //System.out.println(r.getUser().getID());
         }
         //System.out.println(t.size());
         //ReviewDoc x = new ReviewDoc(t.);

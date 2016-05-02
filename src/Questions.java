@@ -72,11 +72,11 @@ public class Questions {
 	}
 	
 	//Question 3: Talia : Do reviewers use similar words in all of their reviews?
-	public static void question3(MovieReader m) {
+	public void question3() throws Exception {
+	    int ct = 0;
 	    double totalAvg = 0.0;
 	    double curAvg = 0.0;
-	    List<User> userSet = m.getUserSet();
-	    Iterator<User> iter2 = userSet.iterator();
+	    Iterator<User> iter2 = users.iterator();
 	    int ctr = 0;
 	    while(iter2.hasNext()){
 	        User u = iter2.next();
@@ -99,21 +99,32 @@ public class Questions {
 	            double total = 0.0;
 	            
 	            //all plays considered
-	            System.out.println("\nAll plays considered:");
+	            //System.out.println("\nAll plays considered:");
 	            for (int i = 0; i < all.size(); i++) {
 	                for (int j = i + 1; j < all.size(); j++) {
 	                    ReviewDoc doc1 = all.get(i);
 	                    ReviewDoc doc2 = all.get(j);
 	                    
-	                    System.out.println("\nComparing " + doc1 + " and " +  doc2);
+	                    //System.out.println("\nComparing " + doc1 + " and " +  doc2);
 	                    double curr = vectorSpace.cosineSimilarity(doc1, doc2);
-	                    System.out.println(curr);
+	                    //System.out.println(curr);
 	                    total += curr;
 	                    curAvg += curr;
 	                }
 	            }
 	            curAvg = total/all.size();
-	            totalAvg += curAvg;
+	            if((total/all.size()) <=  1){
+                    curAvg = total/all.size();
+                    ct++;
+                    //ctr--;
+                    
+                    
+                }
+                else{
+                    ctr--;
+                    curAvg = 0;
+                }
+                totalAvg += curAvg;
 
 	        }
 	    }
@@ -125,52 +136,87 @@ public class Questions {
 	
 	//Question 4: Talia : Do all the reviewers reviewing movie A use similar words to describe them?
 	public void question4() {
+	    int ct = 0;
+	    List<ReviewDoc> c = new ArrayList<ReviewDoc>();
 	    double totalAvg = 0.0;
         double curAvg = 0.0;
-        
+        double total = 0.0;
         Iterator<Movie> iter2 = movies.iterator();
         int ctr = 0;
         while(iter2.hasNext()){
             Movie u = iter2.next();
+            curAvg = 0.0;
+            
+
             if(u.getReviews().size()>2){
                 ctr++;
-                curAvg = 0.0;
-                double curSize = u.getReviews().size();
                 ArrayList<ReviewDoc> all = new ArrayList<ReviewDoc>();
                 Iterator<Review> iter = u.getReviews().iterator();
                 while(iter.hasNext()){
                     Review x = iter.next();
+                    if(x.getText().contains("null") || x.getText().equals(null)){
+                        //System.out.println("OMG");
+                    }
                     ReviewDoc y = new ReviewDoc(x.getText());
-                    all.add(y);
+                    if(!all.contains(y)){
+                        all.add(y);
+
+                    }
                 }
                 
                Corpus allRev = new Corpus(all);
 
 
                 VectorSpaceModel vectorSpace = new VectorSpaceModel(allRev);
-                double total = 0.0;
+                total = 0.0;
                 
                 //all plays considered
-                System.out.println("\nAll plays considered:");
+                //System.out.println("\nAll plays considered:");
                 for (int i = 0; i < all.size(); i++) {
                     for (int j = i + 1; j < all.size(); j++) {
                         ReviewDoc doc1 = all.get(i);
                         ReviewDoc doc2 = all.get(j);
+                        if(!c.contains(doc1)){
+                            c.add(doc1);
+                        }
                         
-                        System.out.println("\nComparing " + doc1 + " and " +  doc2);
+                       // System.out.println("\nComparing " + doc1 + " and " +  doc2);
                         double curr = vectorSpace.cosineSimilarity(doc1, doc2);
-                        System.out.println(curr);
+                        //System.out.println(curr);
                         total += curr;
                         curAvg += curr;
                     }
                 }
-                curAvg = total/all.size();
+                
+                //curAvg = total/all.size();
+                
+                System.out.println(curAvg);
+                //System.out.println(tot)
+                if((total/all.size()) <=  1){
+                    curAvg = total/all.size();
+                    ct++;
+                    //ctr--;
+                    
+                    
+                }
+                else{
+                    ctr--;
+                    curAvg = 0;
+                }
                 totalAvg += curAvg;
 
             }
         }
         System.out.println(ctr);
+        System.out.println(totalAvg);
         System.out.println(totalAvg/((double)ctr));
+        System.out.println(totalAvg/((double)ct) + " y");
+
+        System.out.println(c.size());
+        System.out.println(totalAvg);
+        System.out.println(ct);
+
+        
 		
 	}
 	
@@ -187,12 +233,11 @@ public class Questions {
 		
 	}
 	
-	public static void main(String[]args) throws IOException{
+	public static void main(String[]args) throws Exception{
 	    Questions m = new Questions();
-	    System.out.println("GL");
 
 	    //System.out.println(m.getMovies().size());
-	    m.question4();
+	    m.question3();
 	}
 
 }
