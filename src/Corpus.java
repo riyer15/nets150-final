@@ -6,9 +6,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * This class represents a corpus of documents.
- * It will create an inverted index for these documents.
- * @author swapneel
+ * This class represents a corpus of ReviewDocs
+ * Taken from code from class but uses ReviewDocs instead of Documents
  *
  */
 public class Corpus {
@@ -20,14 +19,11 @@ public class Corpus {
     
     /**
      * The inverted index. 
-     * It will map a term to a set of documents that contain that term.
      */
     private HashMap<String, Set<ReviewDoc>> invertedIndex;
     
     /**
-     * The constructor - it takes in an arraylist of documents.
-     * It will generate the inverted index based on the documents.
-     * @param documents the list of documents
+     * Generates inverted index
      */
     public Corpus(ArrayList<ReviewDoc> reviews) {
         this.reviews = reviews;
@@ -37,10 +33,9 @@ public class Corpus {
     }
     
     /**
-     * This method will create an inverted index.
+     * Creates an inverted index.
      */
     private void createInvertedIndex() {
-        //System.out.println("Creating the inverted index");
         
         for (ReviewDoc rev : reviews) {
             Set<String> terms = rev.getTermList();
@@ -59,9 +54,7 @@ public class Corpus {
     }
     
     /**
-     * This method returns the idf for a given term.
-     * @param term a term in a document
-     * @return the idf for the term
+     * Returns the idf for a given term.
      */
     public double getInverseDocumentFrequency(String term) {
         if (invertedIndex.containsKey(term)) {
@@ -76,14 +69,14 @@ public class Corpus {
     }
 
     /**
-     * @return the documents
+     * Returns the reviewdocs
      */
     public ArrayList<ReviewDoc> getReviews() {
         return reviews;
     }
 
     /**
-     * @return the invertedIndex
+     * Returns the invertedIndex
      */
     public HashMap<String, Set<ReviewDoc>> getInvertedIndex() {
         return invertedIndex;

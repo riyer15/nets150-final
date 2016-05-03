@@ -1,0 +1,25 @@
+Samanatha Chung and Talia Statsky-Frank
+Nets 150 Final Project: Analysis of Amazon Movie Reviews
+
+For this project, we wanted to test a number of properties for Amazon movie
+reviews. We used data from the Stanford site and the data set we used to test
+these properties included 10,000 movie reviews. The entire data set contained
+many more movies but we decided to cap it off there because the heap overflowed
+each time. We decided not to include the data set in our zip file or the full
+data set in our project because it was so large but here is the link to our data
+set: http://snap.stanford.edu/data/web-Movies.html.
+
+Our project fits into the empirical analysis category.  In the summary report
+file attached, we included our hypotheses, conclusions, and graphs.  Also included
+in the zip file is the code we wrote and used to test our hypotheses.  Our project
+used document search to test our hypotheses and social networks to check for 
+triadic closures (more information is in the summary report).
+
+To set up our code, we made a MovieReader class that reads in every review and
+initializes Movie and User objects.  The code reads in each line of a review,
+and assigns it to a variable.  We then create User and Movie objects depending
+on if our user and movie sets already contain the current user or movie.  If they
+do, then we just add the review to the user’s/movie’s review set.
+
+We both helped with the MovieReader, Movie, and User classes.  Sam was in charge
+of questions 1 and 2, and Talia was in charge of questions 3 and 4.

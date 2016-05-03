@@ -3,30 +3,19 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * This class implements the Vector-Space model.
- * It takes a corpus and creates the tf-idf vectors for each document.
- * @author swapneel
- *
+ * VectorSpaceModel code from class, except accounts for ReviewDocs instead of
+ * Documents
  */
 public class VectorSpaceModel {
     
     /**
-     * The corpus of documents.
+     * The corpus of ReviewDocs.
      */
     private Corpus corpus;
-    
-    /**
-     * The tf-idf weight vectors.
-     * The hashmap maps a document to another hashmap.
-     * The second hashmap maps a term to its tf-idf weight for this document.
-     */
     private HashMap<ReviewDoc, HashMap<String, Double>> tfIdfWeights;
     
     /**
-     * The constructor.
-     * It will take a corpus of documents.
-     * Using the corpus, it will generate tf-idf vectors for each document.
-     * @param corpus the corpus of documents
+     * Generates tf-idf vectors for each reviewdoc.
      */
     public VectorSpaceModel(Corpus corpus) {
         this.corpus = corpus;
@@ -39,17 +28,13 @@ public class VectorSpaceModel {
      * This creates the tf-idf vectors.
      */
     private void createTfIdfWeights() {
-        //System.out.println("Creating the tf-idf weight vectors");
         Set<String> terms = corpus.getInvertedIndex().keySet();
-        //System.out.println("Here");
         for (ReviewDoc document : corpus.getReviews()) {
             HashMap<String, Double> weights = new HashMap<String, Double>();
-            //System.out.println(terms.size());
             for (String term : terms) {
                 double tf = document.getTermFrequency(term);
                 double idf = corpus.getInverseDocumentFrequency(term);
                 double weight = tf * idf;
-                
                 weights.put(term, weight);
             }
             tfIdfWeights.put(document, weights);
@@ -57,9 +42,7 @@ public class VectorSpaceModel {
     }
     
     /**
-     * This method will return the magnitude of a vector.
-     * @param document the document whose magnitude is calculated.
-     * @return the magnitude
+     * Returns the magnitude of a vector
      */
     private double getMagnitude(ReviewDoc document) {
         double magnitude = 0;
@@ -73,10 +56,7 @@ public class VectorSpaceModel {
     }
     
     /**
-     * This will take two documents and return the dot product.
-     * @param d1 Document 1
-     * @param d2 Document 2
-     * @return the dot product of the documents
+     * Returns the dot product of two ReviewDocs
      */
     private double getDotProduct(ReviewDoc d1, ReviewDoc d2) {
         double product = 0;
@@ -91,11 +71,7 @@ public class VectorSpaceModel {
     }
     
     /**
-     * This will return the cosine similarity of two documents.
-     * This will range from 0 (not similar) to 1 (very similar).
-     * @param d1 Document 1
-     * @param d2 Document 2
-     * @return the cosine similarity
+     * Returns the cosine similarity between two ReviewDocs
      */
     public double cosineSimilarity(ReviewDoc d1, ReviewDoc d2) {
         return getDotProduct(d1, d2) / (getMagnitude(d1) * getMagnitude(d2));

@@ -7,9 +7,9 @@ import java.util.*;
 
 public class MovieReader {
    
-    private List<Movie> movieSet; 
-    private List<User> userSet;
-    private List<Review> reviewSet;
+    private List<Movie> movieSet; //keeps track of movies
+    private List<User> userSet; //keeps track of users
+    private List<Review> reviewSet; //keeps track of reviews
 
     @SuppressWarnings({ "resource", "unused" })
 	public MovieReader() throws IOException{

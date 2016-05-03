@@ -10,28 +10,22 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * This class represents one document.
- * It will keep track of the term frequencies.
- *
+ *Document code from class except caters to ReviewDocs
  */
 public class ReviewDoc implements Comparable<ReviewDoc>{
     
     /**
-     * A hashmap for term frequencies.
-     * Maps a term to the number of times this terms appears in this document. 
+     * Hashmap for term frequencies.
      */
     private HashMap<String, Integer> termFrequency;
     
     /**
-     * The name of the file to read.
+     * text of review
      */
     private String reviewname;
     
     /**
-     * The constructor.
-     * It takes in the name of a file to read.
-     * It will read the file and pre-process it.
-     * @param filename the name of the file
+     * Preprocesses the text
      */
     public ReviewDoc(String reviewname) {
         this.reviewname = reviewname;
@@ -41,16 +35,11 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
     }
     
     /**
-     * This method will read in the file and do some pre-processing.
-     * The following things are done in pre-processing:
      * Every word is converted to lower case.
      * Every character that is not a letter or a digit is removed.
-     * We don't do any stemming.
-     * Once the pre-processing is done, we create and update the 
      */
     private void readReviewAndPreProcess() {
         Scanner in = new Scanner(new String(reviewname));
-        //System.out.println("Reading file: " + reviewname + " and preprocessing");
         
         while (in.hasNext()) {
             String nextWord = in.next();
@@ -70,10 +59,7 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
     }
     
     /**
-     * This method will return the term frequency for a given word.
-     * If this document doesn't contain the word, it will return 0
-     * @param word The word to look for
-     * @return the term frequency for this word in this document
+     * returns term frequency for a word
      */
     public double getTermFrequency(String word) {
         if (termFrequency.containsKey(word)) {
@@ -84,8 +70,7 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
     }
     
     /**
-     * This method will return a set of all the terms which occur in this document.
-     * @return a set of all terms in this document
+     * Returns set of all the terms which occur in this reviewdoc.
      */
     public Set<String> getTermList() {
         return termFrequency.keySet();
@@ -100,15 +85,14 @@ public class ReviewDoc implements Comparable<ReviewDoc>{
     }
 
     /**
-     * @return the filename
+     * returns text of review
      */
     private String getReviewName() {
         return reviewname;
     }
     
     /**
-     * This method is used for pretty-printing a Document object.
-     * @return the filename
+     * Used for pretty-printing a Document object.
      */
     public String toString() {
         return reviewname;
